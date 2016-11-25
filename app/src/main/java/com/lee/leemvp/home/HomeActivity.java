@@ -1,7 +1,6 @@
 package com.lee.leemvp.home;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,10 +9,11 @@ import android.widget.TextView;
 
 import com.lee.leemvp.Presenter.HomePresenter;
 import com.lee.leemvp.R;
+import com.lee.leemvp.base.BaseActivity;
 import com.lee.leemvp.contracts.HomeContract;
 import com.lee.leemvp.model.UserEntity;
 
-public class HomeActivity extends AppCompatActivity implements HomeContract.View, View.OnClickListener {
+public class HomeActivity extends BaseActivity implements HomeContract.View {
 
 
     private ProgressBar progressBar;
@@ -28,24 +28,32 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     private HomeContract.Presenter mPresenter;
 
+    @Override
+    public int LayoutId() {
+        return R.layout.activity_home;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        mPresenter = new HomePresenter(this);
-
+    public void findView() {
         tv1 = (TextView) findViewById(R.id.text_view1);
         tv2 = (TextView) findViewById(R.id.text_view2);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         edUserName = (EditText) findViewById(R.id.username);
         edPassword = (EditText) findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.login_btn);
+    }
 
+    @Override
+    public void setListener4View() {
         tv1.setOnClickListener(this);
         tv2.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
+    }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPresenter = new HomePresenter(this);
 
     }
 
@@ -93,4 +101,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     public void setText(String text) {
         tv1.setText(text);
     }
+
+
 }
