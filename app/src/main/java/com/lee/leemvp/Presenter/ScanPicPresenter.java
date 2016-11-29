@@ -39,15 +39,20 @@ public class ScanPicPresenter implements ScanPicContract.Presenter {
         call.enqueue(callback);
     }
 
-    Callback<MeizhiData> callback = new Callback<MeizhiData>() {
+    public Callback<MeizhiData> callback = new Callback<MeizhiData>() {
         @Override
         public void onResponse(Call<MeizhiData> call, Response<MeizhiData> response) {
+
+
+            Glide.with(context).pauseRequests();
 
             PhotoViewAttacher mAttacher;
             LinkedList<ImageView> imageViews = new LinkedList<>();
             for (int i = 0; i < response.body().getResults().size(); i++) {
                 ImageView imageView = new ImageView(context);
-                Glide.with(context).load(response.body().getResults().get(i).getUrl())
+                Glide.with(context)
+                        .load(response.body().getResults().get(i).getUrl())
+                        .dontAnimate()
                         .into(imageView);
                 mAttacher = new PhotoViewAttacher(imageView);
                 mAttacher.update();

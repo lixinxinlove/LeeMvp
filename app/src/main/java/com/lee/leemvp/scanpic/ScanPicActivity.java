@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.lee.leemvp.presenter.ScanPicPresenter;
 import com.lee.leemvp.R;
 import com.lee.leemvp.base.BaseActivity;
@@ -54,6 +55,7 @@ public class ScanPicActivity extends BaseActivity implements ScanPicContract.Vie
 
     @Override
     public void showPic(LinkedList<ImageView> data) {
+        Glide.with(this).resumeRequests();
         adapter=new MyPagerAdapter(data);
         viewPager.setAdapter(adapter);
     }

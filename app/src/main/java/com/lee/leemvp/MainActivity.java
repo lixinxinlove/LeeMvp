@@ -1,10 +1,13 @@
 package com.lee.leemvp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import com.lee.leemvp.scanpic.ScanPicActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,11 +28,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-       // startActivity(new Intent(this, ScanPicActivity.class));
-        MyRunnable myRunnable=new MyRunnable(this,handler);
-
-        t1= new Thread(myRunnable);
-        t1.start();
+        startActivity(new Intent(this, ScanPicActivity.class));
+//        MyRunnable myRunnable=new MyRunnable(this,handler);
+//        t1= new Thread(myRunnable);
+//        t1.start();
 
     }
 }
