@@ -1,35 +1,20 @@
-package com.lee.leemvp.Presenter;
-
-import android.os.Handler;
-import android.os.Message;
+package com.lee.leemvp.presenter;
 
 import com.lee.leemvp.contracts.HomeContract;
 import com.lee.leemvp.model.UserEntity;
+import com.lee.leemvp.network.ApiServiceManager;
+import com.lee.leemvp.network.MeizhiData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by android on 2016/11/25.
  */
 public class HomePresenter implements HomeContract.Presenter {
 
-
     private final HomeContract.View homeView;
-
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            UserEntity userEntity = (UserEntity) msg.obj;
-            if (userEntity.userName.equals("lee") && userEntity.password.equals("123")) {
-                homeView.setText("登录成功");
-            } else {
-                homeView.setText("登录失败");
-            }
-            homeView.showProgress(false);
-        }
-    };
-
 
     public HomePresenter(HomeContract.View homeView) {
         this.homeView = homeView;
@@ -44,12 +29,26 @@ public class HomePresenter implements HomeContract.Presenter {
     @Override
     public void login(UserEntity userEntity) {
 
+        Call<MeizhiData> call = ApiServiceManager.getInstance().getMeizhiApi().getMeizhi(1);
+        call.enqueue(callback);
         homeView.showProgress(true);
-        Message msg = new Message();
-        msg.what = 1;
-        msg.obj = userEntity;
-        handler.sendMessageDelayed(msg, 4000);
-
 
     }
+
+    Callback<MeizhiData> callback = new Callback<MeizhiData>() {
+
+        @Override
+        public void onResponse(Call<MeizhiData> call, Response<MeizhiData> response) {
+
+            homeView.setText(response.body().getResults().get(0).getUrl());
+            homeView.showProgress(false);
+        }
+
+        @Override
+        public void onFailure(Call<MeizhiData> call, Throwable t) {
+            homeView.setText("登录失败");
+            homeView.showProgress(false);
+        }
+    };
+
 }
