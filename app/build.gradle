@@ -25,6 +25,7 @@ android {
         }
     }
 
+    //解决jar包冲突
     packagingOptions {
         exclude 'META-INF/maven/com.google.code.gson/gson/pom.xml'
         exclude 'META-INF/maven/com.google.code.gson/gson/pom.properties'
