@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.lee.leemvp.scanpic.ScanPicActivity;
+import com.lee.leemvp.swipebacklayout.LeeBackActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    Button button;
 
 
     Thread t1;
@@ -28,10 +32,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, ScanPicActivity.class));
+
+        button= (Button) findViewById(R.id.btn);
+        button.setOnClickListener(this);
+
 //        MyRunnable myRunnable=new MyRunnable(this,handler);
 //        t1= new Thread(myRunnable);
 //        t1.start();
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(this, LeeBackActivity.class));
     }
 }

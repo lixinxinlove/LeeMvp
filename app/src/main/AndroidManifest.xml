@@ -20,6 +20,9 @@
         </activity>
         <activity android:name=".home.HomeActivity" />
         <activity android:name=".scanpic.ScanPicActivity" />
+        <activity
+            android:name=".swipebacklayout.LeeBackActivity"
+            android:theme="@style/otherPageStyle" />
 
         <receiver
             android:name=".MyReceiver"
