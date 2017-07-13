@@ -32,14 +32,12 @@ public class HomePresenter implements HomeContract.Presenter {
         Call<MeizhiData> call = ApiServiceManager.getInstance().getMeizhiApi().getMeizhi(1);
         call.enqueue(callback);
         homeView.showProgress(true);
-
     }
 
     Callback<MeizhiData> callback = new Callback<MeizhiData>() {
 
         @Override
         public void onResponse(Call<MeizhiData> call, Response<MeizhiData> response) {
-
             homeView.setText(response.body().getResults().get(0).getUrl());
             homeView.showProgress(false);
         }
@@ -50,5 +48,4 @@ public class HomePresenter implements HomeContract.Presenter {
             homeView.showProgress(false);
         }
     };
-
 }

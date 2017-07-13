@@ -14,13 +14,11 @@ public interface HomeContract {
         void showProgress(boolean active);
 
         void setText(String text);
-
     }
 
     interface Presenter extends BasePresenter {
 
         void login(UserEntity userEntity) ;
-
 
     }
 }

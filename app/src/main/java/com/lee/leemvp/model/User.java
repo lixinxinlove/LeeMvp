@@ -1,11 +1,10 @@
 package com.lee.leemvp.model;
 
-import cn.bmob.v3.BmobObject;
 
 /**
  * Created by android on 2016/11/30.
  */
-public class User extends BmobObject {
+public class User {
 
     private String userName;
     private int userAge;

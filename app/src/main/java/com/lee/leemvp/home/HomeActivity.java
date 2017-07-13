@@ -54,9 +54,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new HomePresenter(this);
-
     }
-
 
     @Override
     protected void onResume() {
@@ -81,8 +79,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
                 break;
             case R.id.login_btn:
 
-                UserEntity userEntity = new UserEntity(edUserName.getText().toString(),
-                        edPassword.getText().toString());
+                UserEntity userEntity = new UserEntity(edUserName.getText().toString(), edPassword.getText().toString());
                 mPresenter.login(userEntity);
                 break;
         }
